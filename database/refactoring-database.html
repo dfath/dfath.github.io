@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Database Smells | Blog</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.d7d6c04a.css" as="style"><link rel="preload" href="/assets/js/app.b369ee92.js" as="script"><link rel="preload" href="/assets/js/2.586d9b04.js" as="script"><link rel="preload" href="/assets/js/6.d41e05a0.js" as="script"><link rel="prefetch" href="/assets/js/3.5a7ec749.js"><link rel="prefetch" href="/assets/js/4.7bf71852.js"><link rel="prefetch" href="/assets/js/5.f9acd49d.js"><link rel="prefetch" href="/assets/js/7.148183e8.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.d7d6c04a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Blog" class="logo"> <span class="site-name can-hide">Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="database-smells"><a href="#database-smells" aria-hidden="true" class="header-anchor">#</a> Database Smells</h2> <ul><li><strong>Multipurpose column</strong><br>
+Jika sebuah kolom digunakan untuk beberapa tujuan, dimungkinkan terdapat code tambahan agar data tersebut tetap valid. sebagai contoh:
+<ul><li>sebuah kolom yang menyimpan data tanggal lahir jika seseorang tsb merupakan pelanggan atau tanggal mulai bekerja jika seseorang tsb merupakan pegawai</li></ul></li> <li><strong>Multipurpose table</strong><br>
+Jika sebuah tabel digunakan untuk menyimpan data untuk beberapa jenis entity, dimungkinkan indikasi dari design yang cacat. sebagai contoh:
+<ul><li>sebuah tabel pelanggan yg bersifat generik digunakan untuk menyimpan data kustomer, jenis orang dan organisasi. permasalahan dg pendekatan seperti ini adalah struktur data untuk orang dan organisasi berbeda, seperti entity orang memiliki nama depan, nama tengah, dan nama akhir sementara organisasi hanya nama, sehingga akan terdapat kolom yang bernilai NULL karena perbedaan jenis kustomer ini.</li></ul></li> <li><strong>Redundant data</strong><br>
+Redundant berarti terdapat data yang sama tersimpan dibeberapa tempat, besar kemungkinan terdapat inkonsistensi data. sebagai contoh:
+<ul><li>data alamat pelanggan disimpan dalam beberapa tabel</li></ul></li> <li><strong>Tables with too many columns</strong><br>
+Tabel dengan banyak kolom merupakan indikasi rancangan yg mencoba menyimpan data beberapa entitas dalam satu tabel. contoh:
+<ul><li>Tabel customer mengandung kolom untuk menyimpan berbagai jenis alamat (pengiriman, tagihan, tempat tinggal)</li> <li>Tabel customer mengandung kolom untuk menyimpan berbagai jenis telepon (rumah, kerja, seluler)</li></ul></li> <li><strong>Tables with too many rows</strong><br>
+Tabel yang besar merupakan indikasi permasalah performa. Sebagai contoh, akan sangat time-consuming untuk mencari tabel dengan jutaan baris. Sebaiknya data tersebut dipisah secara vertikal dengan memindahkan sebagian kolom kedalam tabel yang lain, atau pisah secara horizontal dengan memindahkan sebagian kedalam tabel yang lain (database sharding).</li> <li><strong>&quot;Smart&quot; columns</strong><br>
+Jika suatu kolom akan membuat perubahan pada data yang lain. contoh:
+<ul><li>Empat digit pertama pada Client ID mengindikasikan cabang kantor dan untuk mendapatkan data cabang kantor ini, harus parsing data dari Client ID ini</li> <li>Suatu kolom yang menyimpan data struktur XML, sehingga untuk mendapatkan data, harus melakukan parsing</li></ul></li> <li><strong>Fear of change</strong><br>
+Fear of change merupakan indikasi bahwa design schema yang dirty dan perlu di refactor</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.b369ee92.js" defer></script><script src="/assets/js/2.586d9b04.js" defer></script><script src="/assets/js/6.d41e05a0.js" defer></script>
+  </body>
+</html>
